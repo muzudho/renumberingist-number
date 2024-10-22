@@ -3,16 +3,15 @@ from .beads_view import BeadsView
 from .dictionary_order_number import DictionaryOrderNumber
 
 
-class RenumNum:
-    """リナンバー主義者の番号"""
+class Init():
 
-    # めんどくさいので .upper() して 'O' と数字で構成されていればOkとする
-    # 辞書順記数法に対応するために、めんどくさいので '_', 'A' が含まれていてもOkとする
-    __pattern1 = re.compile(r"^([_AO\d]*)$")
 
-    @staticmethod
-    def trail_zero(*args):
-        """With trailing zero
+    def vec(self, *args):
+        """リナンバリンギスト番号を作ります
+        
+        例えば o1o0 を作るときは 1 と指定してください。末尾の 0 は含めないでください
+
+        vec は Vector の略です
 
         Parameters
         ----------
@@ -61,6 +60,18 @@ class RenumNum:
 
         # タプルに変換して使う
         return RenumNum(tuple(element_list))
+
+
+renumnum = Init()
+
+
+class RenumNum:
+    """リナンバー主義者の番号"""
+
+    # めんどくさいので .upper() して 'O' と数字で構成されていればOkとする
+    # 辞書順記数法に対応するために、めんどくさいので '_', 'A' が含まれていてもOkとする
+    __pattern1 = re.compile(r"^([_AO\d]*)$")
+
 
     @staticmethod
     def convert_str_to_list(text):

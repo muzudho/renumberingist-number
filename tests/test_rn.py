@@ -1,34 +1,50 @@
 """
 python -m tests.test_rn
 """
+from src.renumnum import renumnum as rn
 from src.renumnum import RenumNum as RN
 
-rn1 = RN.trail_zero(1, 2)
-rn2 = RN.trail_zero((1, 2))
-print(f"{rn1.elements}")                # (1, 2, 0)
-print(f"{rn2.elements}")                # (1, 2, 0)
-if f"{rn1.elements}" != f"{rn2.elements}":
-    raise ValueError(f"{rn1.elements=} != {rn2.elements=}")
+# リナンバリンギスト番号を生成する推奨の方法
+vec1 = rn.vec(1, 2)
+vec2 = rn.vec((1, 2))
+print(f"{vec1.elements}")                # (1, 2, 0)
+print(f"{vec2.elements}")                # (1, 2, 0)
+if f"{vec1.elements}" != f"{vec2.elements}":
+    raise ValueError(f"{vec1.elements=} != {vec2.elements=}")
 
-rn = RN.trail_zero(3)
-print(f"{rn.elements}")                # (3, 0)
+vec1 = rn.vec(3)
+vec2 = rn.vec((3))
+print(f"{vec1.elements}")                # (3, 0)
+print(f"{vec2.elements}")                # (3, 0)
+if f"{vec1.elements}" != f"{vec2.elements}":
+    raise ValueError(f"{vec1.elements=} != {vec2.elements=}")
 
-rn = RN((1, 2, 0))
-print(f"{rn.elements}")                # (1, 2, 0)
+# コンストラクターを直接使う方法（末尾の 0 が必要です）
+vec1 = RN(1, 2, 0)
+vec2 = RN((1, 2, 0))
+print(f"{vec1.elements}")                # (1, 2, 0)
+print(f"{vec2.elements}")                # (1, 2, 0)
+if f"{vec1.elements}" != f"{vec2.elements}":
+    raise ValueError(f"{vec1.elements=} != {vec2.elements=}")
 
-rn = RN((3, 0))
-print(f"{rn.elements}")                # (3, 0)
+vec1 = RN(3, 0)
+vec2 = RN((3, 0))
+print(f"{vec1.elements}")                # (3, 0)
+print(f"{vec2.elements}")                # (3, 0)
+if f"{vec1.elements}" != f"{vec2.elements}":
+    raise ValueError(f"{vec1.elements=} != {vec2.elements=}")
 
 test_data = [
     # 種をまく
-    ['RN.trail_zero(1)', RN.trail_zero(1), 'O1o0', (1, 0)],
-    # ----------------------   -----------------------  ----   ------
-    # 1                        2                        3      3
+    ['rn.vec(1)', rn.vec(1), 'O1o0', (1, 0)],
+    # ----------  ---------  ------  ------
+    # 1           2          3       4
     # 1. Test case title
     # 2. Actual
-    # 3. Expected
+    # 3. Expected Label
+    # 4. Expected
 
-    ['RN.trail_zero(2)', RN.trail_zero(2), 'O2o0', (2, 0)],
+    ['rn.vec(2)', rn.vec(2), 'O2o0', (2, 0)],
 
     # 正の整数
     ['1', RN(1), 'O1', (1,)],
