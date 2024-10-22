@@ -43,6 +43,7 @@ if str(vec) != 'O1o0':
 
 #vec = rn.vec('1, 2')   # error
 
+# 辞書順番号（Dictionary order number）。末尾に o0 が付いていなくても、辞書順番号として有効です
 vec = rn.vec('_9')
 print(str(vec))     # O_9o0
 if str(vec) != 'O_9o0':
@@ -53,9 +54,26 @@ print(str(vec))     # OA10o0
 if str(vec) != 'OA10o0':
     raise ValueError(f'{vec=}')
 
+# 数珠玉記数法（Beads notation）。末尾に o0 が付いていなくても、数珠玉記数法として有効です
+vec = rn.vec('O0')
+print(str(vec))     # O0o0
+if str(vec) != 'O0o0':
+    raise ValueError(f'{vec=}')
+
+vec = rn.vec('O1')
+print(str(vec))     # O1o0
+if str(vec) != 'O1o0':
+    raise ValueError(f'{vec=}')
+
+# リナンバリンギスト番号
+vec = rn.vec('O0o0')
+print(str(vec))     # O0o0
+if str(vec) != 'O0o0':
+    raise ValueError(f'{vec=}')
+
 vec = rn.vec('O1o0')
-print(str(vec))     # O1o0o0        # FIXME 0 が余分につくのは良くない？
-if str(vec) != 'O1o0o0':            # FIXME 0 が余分につくのは良くない？
+print(str(vec))     # O1o0
+if str(vec) != 'O1o0':
     raise ValueError(f'{vec=}')
 
 

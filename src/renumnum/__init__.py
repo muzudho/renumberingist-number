@@ -102,6 +102,30 @@ class RenumNum:
 
 
     @staticmethod
+    def what_is(upper_case_text):
+        """種類を調べる
+
+        先頭に O が付いているものは、［数珠玉記数法］か、［リナンバリンギスト番号］のどちらか。
+        
+            'o0' または 'O0' なら［数珠玉記数法］、
+            それ以外で末尾に 'o0' または 'O0' が付いていたら［リナンバリンギスト番号］、
+            末尾に 'o0' または 'O0' が付いていなければ［数珠玉記数法］
+        
+        どちらにしても先頭に付いている O は削除する。［リナンバリンギスト番号］であれば、末尾の 'o0' または 'O0' は削除する
+        """
+        if not upper_case_text.startswith('O'):
+            return None
+
+        if upper_case_text == 'O0':
+            return 'beads'
+        
+        if upper_case_text.endswith('O0'):
+            return 'renumnum'
+        
+        return 'beads'
+
+
+    @staticmethod
     def convert_str_to_list(text):
         # 大文字に変換
         text = text.upper()
@@ -113,9 +137,17 @@ class RenumNum:
         else:
             raise ValueError(f"not cyber vector: {text}")
 
-        # 先頭に O が付いているのは構わないものとし、
-        # 先頭に付いている O は削除する
-        text = text.lstrip('O')
+
+        kind = RenumNum.what_is(upper_case_text=text)
+        print(f"{kind=}") # FIXME
+        if kind == 'renumnum':
+            # 先頭の 'O' １文字、末尾の 'O0' ２文字を削除する 
+            text = text[1:-2]
+        
+        elif kind == 'beads':
+            # 先頭の 'O' １文字を削除する 
+            text = text[1:]
+
 
         new_element_list = []
 
