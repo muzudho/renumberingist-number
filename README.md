@@ -183,42 +183,52 @@ import renumnum as rn
 
 # リナンバリンギスト番号の変数名は何でも構いませんがとりあえず oo としてみましょう
 oo = rn.num(1)
-print(str(oo))     # O1o0
+print(str(oo))          # O1o0
+print(oo.to_tuple())    # (1,)
+print(oo.to_list())     # [1]
 
 oo = rn.num(1, 2)
-print(str(oo))     # O1o2o0
+print(str(oo))          # O1o2o0
+print(oo.to_tuple())    # (1, 2)
+print(oo.to_list())     # [1, 2]
 
 oo = rn.num('1')
-print(str(oo))     # O1o0
+print(str(oo))          # O1o0
+print(oo.to_tuple())    # (1,)
+print(oo.to_list())     # [1]
 
 #oo = rn.num('1, 2')   # error
 
 # 辞書順番号（Dictionary order number）。末尾に o0 が付いていなくても、辞書順番号として有効です
 oo = rn.num('_9')
-print(str(oo))     # O_9o0
+print(str(oo))          # O_9o0
+print(oo.to_tuple())    # (-1,)
+print(oo.to_list())     # [-1]
 
 oo = rn.num('A10')
-print(str(oo))     # OA10o0
+print(str(oo))          # OA10o0
+print(oo.to_tuple())    # (10,)
+print(oo.to_list())     # [10]
 
 # 数珠玉記数法（Beads notation）。末尾に o0 が付いていなくても、数珠玉記数法として有効です
 oo = rn.num('O0')
-print(str(oo))     # O0o0
+print(str(oo))          # O0o0
+print(oo.to_tuple())    # (0,)
+print(oo.to_list())     # [0]
 
 oo = rn.num('O1')
-print(str(oo))     # O1o0
+print(str(oo))          # O1o0
+print(oo.to_tuple())    # (1,)
+print(oo.to_list())     # [1]
 
 # リナンバリンギスト番号
 oo = rn.num('O0o0')
-print(str(oo))     # O0o0
+print(str(oo))          # O0o0
+print(oo.to_tuple())    # (0,)
+print(oo.to_list())     # [0]
 
 oo = rn.num('O1o0')
-print(str(oo))     # O1o0
-
-# タプル
-oo = rn.num((1, 2))
-print(str(oo))     # O1o2o0
-
-# リスト
-oo = rn.num([1, 2])
-print(str(oo))     # O1o2o0
+print(str(oo))          # O1o0
+print(oo.to_tuple())    # (1,)
+print(oo.to_list())     # [1]
 ```
