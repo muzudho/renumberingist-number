@@ -3,7 +3,8 @@ python -m tests.test_rn
 """
 from src.renumnum import renumnum as rn
 
-# リナンバリンギスト番号を生成する推奨の方法
+
+# リナンバリンギスト番号の生成
 vec1 = rn.vec(1, 2)
 vec2 = rn.vec((1, 2))
 print(f"{vec1.elements}")                # (1, 2, 0)
@@ -18,21 +19,6 @@ print(f"{vec2.elements}")                # (3, 0)
 if f"{vec1.elements}" != f"{vec2.elements}":
     raise ValueError(f"{vec1.elements=} != {vec2.elements=}")
 
-# コンストラクターを直接使う方法（末尾の 0 が必要です）
-# この方法は推奨していません
-vec1 = RN(1, 2, 0)
-vec2 = RN((1, 2, 0))
-print(f"{vec1.elements}")                # (1, 2, 0)
-print(f"{vec2.elements}")                # (1, 2, 0)
-if f"{vec1.elements}" != f"{vec2.elements}":
-    raise ValueError(f"{vec1.elements=} != {vec2.elements=}")
-
-vec1 = RN(3, 0)
-vec2 = RN((3, 0))
-print(f"{vec1.elements}")                # (3, 0)
-print(f"{vec2.elements}")                # (3, 0)
-if f"{vec1.elements}" != f"{vec2.elements}":
-    raise ValueError(f"{vec1.elements=} != {vec2.elements=}")
 
 test_data = [
     # 種をまく

@@ -17,7 +17,7 @@ class Init():
         import renumnum as rn
         として、
         vec = rn.vec(1) のように使う方法を推奨します。
-        リナンバリンギスト番号の変数名には例えば vec を使います
+        リナンバリンギスト番号の変数名には、他との被りがなければ vec を使います
 
         Parameters
         ----------
@@ -147,54 +147,24 @@ class RenumNum:
         return new_element_list
 
 
-    def __init__(self, *args):
+    def __init__(self, vec):
         """初期化
 
         このコンストラクタを直接呼び出すことは推奨しません。
-        import renumnum as rn
-        として、
-        vec = rn.vec(1) のように使う方法を推奨します。
-        リナンバリンギスト番号の変数名には例えば vec を使います
+        詳しくは Init クラスの vec 関数を参照してください
 
         Parameters
         ----------
-        *args : tuple
-            可変長引数
+        vec : tuple
+            タプル。 vec は Vector の略です
         """
 
-        # 引数が０個か？
-        if len(args) < 1:
-            raise ValueError('specify one or more arguments')
+        if type(vec) is not tuple:
+            raise ValueError(f"vec argument type must be a tuple")
 
-        # 引数が１つか？
-        elif len(args) == 1:
-            try:
-                # 整数かどうか判定
-                int_value = int(str(args[0]), 10)
-
-            # 整数ではなかったら
-            except ValueError:
-                # タプル型なら
-                if type(args[0]) is tuple:
-                    # そのまま渡す
-                    self._beadsv = BeadsView(args[0])
-
-                # 文字列と想定して解析を進める
-                else:
-                    element_list = RenumNum.convert_str_to_list(args[0])
-                    # タプルに変換して渡す
-                    self._beadsv = BeadsView(tuple(element_list))
-
-            # 整数だったら
-            else:
-                # そのまま渡す
-                self._beadsv = BeadsView(int_value)
+        # そのまま渡す
+        self._beadsv = BeadsView(vec)
         
-        # 引数が複数個か？
-        else:
-            # そのまま渡す
-            self._beadsv = BeadsView(args)
-
 
     def __str__(self):
         """辞書順記数法 と 数珠玉記数法 の併用"""
