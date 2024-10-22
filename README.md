@@ -213,4 +213,12 @@ print(str(oo))     # O0o0
 
 oo = rn.vec('O1o0')
 print(str(oo))     # O1o0
+
+# タプル
+oo = rn.vec((1, 2))
+print(str(oo))     # O1o2o0
+
+# リスト
+oo = rn.vec([1, 2])
+print(str(oo))     # O1o2o0
 ```

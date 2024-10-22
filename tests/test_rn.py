@@ -139,6 +139,17 @@ print(str(oo))     # O1o0
 if str(oo) != 'O1o0':
     raise ValueError(f'{oo=}')
 
+# タプル
+oo = rn.vec((1, 2))
+print(str(oo))     # O1o2o0
+if str(oo) != 'O1o2o0':
+    raise ValueError(f'{oo=}')
+
+# リスト
+oo = rn.vec([1, 2])
+print(str(oo))     # O1o2o0
+if str(oo) != 'O1o2o0':
+    raise ValueError(f'{oo=}')
 
 
 test_data = [
@@ -219,6 +230,11 @@ test_data = [
     ['(1,2)', rn.vec((1, 2)), 'O1o2o0', (1, 2, 0)],
     ['(1,2,-3)', rn.vec((1, 2, -3)), 'O1o2o_7o0', (1, 2, -3, 0)],
     ['(1,2,10,4)', rn.vec((1, 2, 10, 4)), 'O1o2oA10o4o0', (1, 2, 10, 4, 0)],
+
+    # リスト
+    ['[1,2]', rn.vec([1, 2]), 'O1o2o0', (1, 2, 0)],
+    ['[1,2,-3]', rn.vec([1, 2, -3]), 'O1o2o_7o0', (1, 2, -3, 0)],
+    ['[1,2,10,4]', rn.vec([1, 2, 10, 4]), 'O1o2oA10o4o0', (1, 2, 10, 4, 0)],
 ]
 
 for datum in test_data:

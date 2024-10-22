@@ -42,6 +42,9 @@ def vec(*args):
 
         タプル
         ((1, 2))
+
+        リスト
+        ([1, 2])
     """
 
     element_list = None
@@ -59,7 +62,12 @@ def vec(*args):
         # 整数ではなかったら
         except ValueError:
             # タプル型なら
-            if type(args[0]) is tuple:
+            if type(args[0]) is list:
+                # そのまま使う
+                element_list = args[0]
+
+            # タプル型なら
+            elif type(args[0]) is tuple:
                 # いったんリストに戻す
                 element_list = list(args[0])
 
