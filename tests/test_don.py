@@ -75,38 +75,50 @@ for datum in test_data:
     if f'{datum[1]}' == datum[2]:
         print(f'{datum[0]} --> "{datum[1]}" {datum[1].number}')
     else:
-        print(
+        raise ValueError(
             f'[Error] {datum[0]} --> "{datum[1]}" {datum[1].number} Expected: "{datum[2]}"')
 
 # 間違ったAの個数を例外にできるか確認します
 try:
     print(f'[Error] "A1" --> {DON("A1")}')
 except:
-    print(f'"A1" is not DON')
+    print(f'"A1" is not DON, ok')
+else:
+    raise ValueError(f'"A1" is not DON')
 
 try:
     print(f'[Error] "AA10" --> {DON("AA10")}')
 except:
-    print(f'"AA10" is not DON')
+    print(f'"AA10" is not DON, ok')
+else:
+    raise ValueError(f'"AA10" is not DON')
 
 # 間違った '_' の個数を例外にできるか確認します
 try:
     print(f'[Error] "_90" --> {DON("_90")}')
 except:
-    print(f'"_90" is not DON')
+    print(f'"_90" is not DON, ok')
+else:
+    raise ValueError(f'"_90" is not DON')
 
 try:
     print(f'[Error] "__900" --> {DON("__900")}')
 except:
-    print(f'"__900" is not DON')
+    print(f'"__900" is not DON, ok')
+else:
+    raise ValueError(f'"__900" is not DON')
 
 # 'A' と '_' の混合を例外にできるか確認します
 try:
     print(f'[Error] "_A90" --> {DON("_A90")}')
 except:
-    print(f'"_A90" is not DON')
+    print(f'"_A90" is not DON, ok')
+else:
+    raise ValueError(f'"_A90" is not DON')
 
 try:
     print(f'[Error] "A_90" --> {DON("A_90")}')
 except:
-    print(f'"A_90" is not DON')
+    print(f'"A_90" is not DON, ok')
+else:
+    raise ValueError(f'"A_90" is not DON')

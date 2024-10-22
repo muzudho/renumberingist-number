@@ -1,5 +1,5 @@
 import re
-from .beads_view import BeadsView
+from .beads_notation import BeadsNotation
 from .dictionary_order_number import DictionaryOrderNumber
 
 
@@ -226,7 +226,7 @@ class RenumNum:
             raise ValueError(f"vector_as_tuple argument type must be a tuple")
 
         # そのまま渡す
-        self._beadsv = BeadsView(vector_as_tuple)
+        self._beadsv = BeadsNotation(vector_as_tuple)
         
 
     def __str__(self):

@@ -1,8 +1,8 @@
 import re
 
 
-class BeadsView:
-    """数珠ビュー"""
+class BeadsNotation:
+    """数珠玉記数法"""
 
     def __init__(self, value=0):
 
