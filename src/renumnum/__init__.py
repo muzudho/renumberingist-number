@@ -3,17 +3,15 @@ from .beads_view import BeadsView
 from .dictionary_order_number import DictionaryOrderNumber
 
 
-def vec(*args):
+def num(*args):
     """リナンバリンギスト番号を作ります
     
     例えば o1o0 を作るときは 1 と指定してください。末尾の 0 は含めないでください
 
-    vec は Vector の略です
-
     例えば、
     import renumnum as rn
     として、
-    oo = rn.vec(1) のように使う方法を推奨します。
+    oo = rn.num(1) のように使う方法を推奨します。
     リナンバリンギスト番号の変数名は何でも構いませんがとりあえず oo としてみましょう
 
     Parameters
@@ -110,18 +108,18 @@ class RenumnumInSrc():
     """
 
     @staticmethod
-    def vec(*arg):
-        """グローバル関数の vec() を呼び出す
+    def num(*arg):
+        """グローバル関数の num() を呼び出す
         
         Parameters
         ----------
         *arg : tuple
             可変長引数
         """
-        global vec
+        global num
 
         # arg はタプルなので、 *(arg) と書くことで、可変長引数に expanding する
-        return vec(*(arg))
+        return num(*(arg))
 
 
 renumnum_in_src = RenumnumInSrc()
@@ -212,23 +210,23 @@ class RenumNum:
         return new_element_list
 
 
-    def __init__(self, vec):
+    def __init__(self, vector_as_tuple):
         """初期化
 
         このコンストラクタを直接呼び出すことは推奨しません。
-        詳しくは Init クラスの vec 関数を参照してください
+        詳しくは Init クラスの num 関数を参照してください
 
         Parameters
         ----------
-        vec : tuple
-            タプル。 vec は Vector の略です
+        vector_as_tuple : tuple
+            タプル
         """
 
-        if type(vec) is not tuple:
-            raise ValueError(f"vec argument type must be a tuple")
+        if type(vector_as_tuple) is not tuple:
+            raise ValueError(f"vector_as_tuple argument type must be a tuple")
 
         # そのまま渡す
-        self._beadsv = BeadsView(vec)
+        self._beadsv = BeadsView(vector_as_tuple)
         
 
     def __str__(self):
