@@ -188,32 +188,32 @@ import renumnum as rn
 print("整数：1")
 oo = rn.num(1)
 print(str(oo))          # O1o0
-print(oo.to_tuple())    # (1,)
-print(oo.to_list())     # [1]
+print(oo.totuple())    # (1,)
+print(oo.tolist())     # [1]
 
 print("コンマ区切りの整数：1, 2")
 oo = rn.num(1, 2)
 print(str(oo))          # O1o2o0
-print(oo.to_tuple())    # (1, 2)
-print(oo.to_list())     # [1, 2]
+print(oo.totuple())    # (1, 2)
+print(oo.tolist())     # [1, 2]
 
 print("タプル：(1, 2)")
 oo = rn.num((1, 2))
 print(str(oo))          # O1o2o0
-print(oo.to_tuple())    # (1, 2)
-print(oo.to_list())     # [1, 2]
+print(oo.totuple())    # (1, 2)
+print(oo.tolist())     # [1, 2]
 
 print("リスト：[1, 2]")
 oo = rn.num([1, 2])
 print(str(oo))          # O1o2o0
-print(oo.to_tuple())    # (1, 2)
-print(oo.to_list())     # [1, 2]
+print(oo.totuple())    # (1, 2)
+print(oo.tolist())     # [1, 2]
 
 print("文字列：'1'")
 oo = rn.num('1')
 print(str(oo))          # O1o0
-print(oo.to_tuple())    # (1,)
-print(oo.to_list())     # [1]
+print(oo.totuple())    # (1,)
+print(oo.tolist())     # [1]
 
 #oo = rn.num('1, 2')   # error
 
@@ -221,38 +221,38 @@ print(oo.to_list())     # [1]
 print("辞書順番号（Dictionary order number）：'_9'")
 oo = rn.num('_9')
 print(str(oo))          # O_9o0
-print(oo.to_tuple())    # (-1,)
-print(oo.to_list())     # [-1]
+print(oo.totuple())    # (-1,)
+print(oo.tolist())     # [-1]
 
 print("同：'A10'")
 oo = rn.num('A10')
 print(str(oo))          # OA10o0
-print(oo.to_tuple())    # (10,)
-print(oo.to_list())     # [10]
+print(oo.totuple())    # (10,)
+print(oo.tolist())     # [10]
 
 # 末尾に o0 が付いていなくても、数珠玉記数法として有効です
 print("数珠玉記数法（Beads notation）：'O0'")
 oo = rn.num('O0')
 print(str(oo))          # O0o0
-print(oo.to_tuple())    # (0,)
-print(oo.to_list())     # [0]
+print(oo.totuple())    # (0,)
+print(oo.tolist())     # [0]
 
 print("同：'O1'")
 oo = rn.num('O1')
 print(str(oo))          # O1o0
-print(oo.to_tuple())    # (1,)
-print(oo.to_list())     # [1]
+print(oo.totuple())    # (1,)
+print(oo.tolist())     # [1]
 
 # リナンバリンギスト番号
 print("リナンバリンギスト番号（Renumberingist number）：'O0o0'")
 oo = rn.num('O0o0')
 print(str(oo))          # O0o0
-print(oo.to_tuple())    # (0,)
-print(oo.to_list())     # [0]
+print(oo.totuple())    # (0,)
+print(oo.tolist())     # [0]
 
 print("同：'O1o0'")
 oo = rn.num('O1o0')
 print(str(oo))          # O1o0
-print(oo.to_tuple())    # (1,)
-print(oo.to_list())     # [1]
+print(oo.totuple())    # (1,)
+print(oo.tolist())     # [1]
 ```
