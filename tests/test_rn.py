@@ -1,7 +1,13 @@
 """
 python -m tests.test_rn
 """
-from src.renumnum import renumnum as rn
+# 実際には、
+#
+#   import renumnum as rn
+#
+# のように書きたい。
+# テストでは以下のように書く
+from src.renumnum import renumnum_in_src as rn
 
 
 # リナンバリンギスト番号の生成

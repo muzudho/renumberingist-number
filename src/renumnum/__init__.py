@@ -3,94 +3,120 @@ from .beads_view import BeadsView
 from .dictionary_order_number import DictionaryOrderNumber
 
 
-class Init():
+def vec(*args):
+    """リナンバリンギスト番号を作ります
+    
+    例えば o1o0 を作るときは 1 と指定してください。末尾の 0 は含めないでください
 
+    vec は Vector の略です
 
-    def vec(self, *args):
-        """リナンバリンギスト番号を作ります
-        
-        例えば o1o0 を作るときは 1 と指定してください。末尾の 0 は含めないでください
+    例えば、
+    import renumnum as rn
+    として、
+    vec = rn.vec(1) のように使う方法を推奨します。
+    リナンバリンギスト番号の変数名には、他との被りがなければ vec を使います
 
-        vec は Vector の略です
+    Parameters
+    ----------
+    *args : tuple
+        可変長引数
 
-        例えば、
-        import renumnum as rn
-        として、
-        vec = rn.vec(1) のように使う方法を推奨します。
-        リナンバリンギスト番号の変数名には、他との被りがなければ vec を使います
+        整数が１つ
+        (1)
 
-        Parameters
-        ----------
-        *args : tuple
-            可変長引数
+        整数が複数
+        (1, 2)
 
-            整数が１つ
-            (1)
+        文字列１つで整数が１つ
+        ('1')
+        ('10')
 
-            整数が複数
-            (1, 2)
+        辞書順記数法
+        ('_9')
+        ('A10')
 
-            文字列１つで整数が１つ
-            ('1')
-            ('10')
+        数珠玉記数法
+        ('O_9')
+        ('OA10')
+        ('O_9o1oA10')
 
-            辞書順記数法
-            ('_9')
-            ('A10')
+        タプル
+        ((1, 2))
+    """
 
-            数珠玉記数法
-            ('O_9')
-            ('OA10')
-            ('O_9o1oA10')
+    element_list = None
 
-            タプル
-            ((1, 2))
-        """
+    # 引数が０個か？
+    if len(args) < 1:
+        raise ValueError('specify one or more arguments')
 
-        element_list = None
+    # 引数が１つか？
+    elif len(args) == 1:
+        try:
+            # 整数かどうか判定
+            int_value = int(str(args[0]), 10)
 
-        # 引数が０個か？
-        if len(args) < 1:
-            raise ValueError('specify one or more arguments')
+        # 整数ではなかったら
+        except ValueError:
+            # タプル型なら
+            if type(args[0]) is tuple:
+                # いったんリストに戻す
+                element_list = list(args[0])
 
-        # 引数が１つか？
-        elif len(args) == 1:
-            try:
-                # 整数かどうか判定
-                int_value = int(str(args[0]), 10)
-
-            # 整数ではなかったら
-            except ValueError:
-                # タプル型なら
-                if type(args[0]) is tuple:
-                    # いったんリストに戻す
-                    element_list = list(args[0])
-
-                # TODO 整数ではなかったら
-                else:
-                    # 文字列と想定して解析を進める
-                    element_list = RenumNum.convert_str_to_list(args[0])
-
-            # 整数だったら
+            # TODO 整数ではなかったら
             else:
-                # リストに変換する
-                element_list = []
-                element_list.append(int_value)
+                # 文字列と想定して解析を進める
+                element_list = RenumNum.convert_str_to_list(args[0])
 
-        # 引数が複数個か？
+        # 整数だったら
         else:
             # リストに変換する
             element_list = []
-            element_list.extend(list(args))
+            element_list.append(int_value)
 
-        # 0 の要素を追加
-        element_list.append(0)
+    # 引数が複数個か？
+    else:
+        # リストに変換する
+        element_list = []
+        element_list.extend(list(args))
 
-        # タプルに変換して使う
-        return RenumNum(tuple(element_list))
+    # 0 の要素を追加
+    element_list.append(0)
+
+    # タプルに変換して使う
+    return RenumNum(tuple(element_list))
 
 
-renumnum = Init()
+class RenumnumInSrc():
+    """テストで使う仕組み
+
+    テストでは
+
+        import renumnum as rn
+
+    のように書けないので、
+    テストでは以下のように書く
+
+        from src.renumnum import renumnum_in_src as rn
+    
+    """
+
+    @staticmethod
+    def vec(*arg):
+        """グローバル関数の vec() を呼び出す
+        
+        Parameters
+        ----------
+        *arg : tuple
+            可変長引数
+        """
+        global vec
+
+        # arg はタプルなので、 *(arg) と書くことで、可変長引数に expanding する
+        return vec(*(arg))
+
+
+renumnum_in_src = RenumnumInSrc()
 
 
 class RenumNum:
