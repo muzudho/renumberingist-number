@@ -13,8 +13,8 @@ def vec(*args):
     例えば、
     import renumnum as rn
     として、
-    vec = rn.vec(1) のように使う方法を推奨します。
-    リナンバリンギスト番号の変数名には、他との被りがなければ vec を使います
+    oo = rn.vec(1) のように使う方法を推奨します。
+    リナンバリンギスト番号の変数名は何でも構いませんがとりあえず oo としてみましょう
 
     Parameters
     ----------
@@ -237,3 +237,8 @@ class RenumNum:
     @property
     def elements(self):
         return self._beadsv.elements
+
+
+    def to_vector(self):
+        """末尾の 0 を取り除いたリストを返す"""
+        return list(self.elements)[0:-1]

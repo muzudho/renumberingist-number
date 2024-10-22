@@ -181,35 +181,36 @@ oa10o0
 ```py
 import renumnum as rn
 
-vec = rn.vec(1)
-print(str(vec))     # O1o0
+# リナンバリンギスト番号の変数名は何でも構いませんがとりあえず oo としてみましょう
+oo = rn.vec(1)
+print(str(oo))     # O1o0
 
-vec = rn.vec(1, 2)
-print(str(vec))     # O1o2o0
+oo = rn.vec(1, 2)
+print(str(oo))     # O1o2o0
 
-vec = rn.vec('1')
-print(str(vec))     # O1o0
+oo = rn.vec('1')
+print(str(oo))     # O1o0
 
-#vec = rn.vec('1, 2')   # error
+#oo = rn.vec('1, 2')   # error
 
 # 辞書順番号（Dictionary order number）。末尾に o0 が付いていなくても、辞書順番号として有効です
-vec = rn.vec('_9')
-print(str(vec))     # O_9o0
+oo = rn.vec('_9')
+print(str(oo))     # O_9o0
 
-vec = rn.vec('A10')
-print(str(vec))     # OA10o0
+oo = rn.vec('A10')
+print(str(oo))     # OA10o0
 
 # 数珠玉記数法（Beads notation）。末尾に o0 が付いていなくても、数珠玉記数法として有効です
-vec = rn.vec('O0')
-print(str(vec))     # O0o0
+oo = rn.vec('O0')
+print(str(oo))     # O0o0
 
-vec = rn.vec('O1')
-print(str(vec))     # O1o0
+oo = rn.vec('O1')
+print(str(oo))     # O1o0
 
 # リナンバリンギスト番号
-vec = rn.vec('O0o0')
-print(str(vec))     # O0o0
+oo = rn.vec('O0o0')
+print(str(oo))     # O0o0
 
-vec = rn.vec('O1o0')
-print(str(vec))     # O1o0
+oo = rn.vec('O1o0')
+print(str(oo))     # O1o0
 ```
