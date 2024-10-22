@@ -245,6 +245,11 @@ class RenumNum:
         return self._beadsv.elements
 
 
-    def to_vector(self):
+    def to_tuple(self):
         """末尾の 0 を取り除いたリストを返す"""
-        return list(self.elements)[0:-1]
+        return self._beadsv.elements[0:-1]
+
+
+    def to_list(self):
+        """末尾の 0 を取り除いたリストを返す"""
+        return list(self._beadsv.elements)[0:-1]
