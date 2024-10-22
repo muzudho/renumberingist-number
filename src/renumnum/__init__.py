@@ -165,7 +165,6 @@ class RenumNum:
 
 
         kind = RenumNum.what_is(upper_case_text=text)
-        print(f"{kind=}") # FIXME
         if kind == 'renumnum':
             # 先頭の 'O' １文字、末尾の 'O0' ２文字を削除する 
             text = text[1:-2]
