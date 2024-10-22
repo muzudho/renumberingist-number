@@ -13,10 +13,38 @@ class Init():
 
         vec は Vector の略です
 
+        例えば、
+        import renumnum as rn
+        として、
+        vec = rn.vec(1) のように使う方法を推奨します。
+        リナンバリンギスト番号の変数名には例えば vec を使います
+
         Parameters
         ----------
         *args : tuple
             可変長引数
+
+            整数が１つ
+            (1)
+
+            整数が複数
+            (1, 2)
+
+            文字列１つで整数が１つ
+            ('1')
+            ('10')
+
+            辞書順記数法
+            ('_9')
+            ('A10')
+
+            数珠玉記数法
+            ('O_9')
+            ('OA10')
+            ('O_9o1oA10')
+
+            タプル
+            ((1, 2))
         """
 
         element_list = None
@@ -118,8 +146,15 @@ class RenumNum:
 
         return new_element_list
 
+
     def __init__(self, *args):
         """初期化
+
+        このコンストラクタを直接呼び出すことは推奨しません。
+        import renumnum as rn
+        として、
+        vec = rn.vec(1) のように使う方法を推奨します。
+        リナンバリンギスト番号の変数名には例えば vec を使います
 
         Parameters
         ----------
@@ -170,6 +205,7 @@ class RenumNum:
         # 先頭だけを大文字の 'O' にする
         text = f"O{text[1:]}"
         return text
+
 
     @property
     def elements(self):
