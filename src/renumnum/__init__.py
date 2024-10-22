@@ -91,33 +91,48 @@ class RenumNum:
 
         return new_element_list
 
-    def __init__(self, value=0, order=1):
-        self._order = order
+    def __init__(self, *args):
+        """初期化
 
-        try:
-            # 整数かどうか判定
-            int_value = int(str(value), 10)
+        Parameters
+        ----------
+        *args : tuple
+            可変長引数
+        """
 
-        except ValueError:
-            # 整数ではなかった
-            #
-            # タプル型なら
-            if type(value) is tuple:
-                # そのまま渡す
-                self._beadsv = BeadsView(value)
+        # 引数が０個か？
+        if len(args) < 1:
+            raise ValueError('specify one or more arguments')
 
+        # 引数が１つか？
+        elif len(args) == 1:
+            try:
+                # 整数かどうか判定
+                int_value = int(str(args[0]), 10)
+
+            # 整数ではなかったら
+            except ValueError:
+                # タプル型なら
+                if type(args[0]) is tuple:
+                    # そのまま渡す
+                    self._beadsv = BeadsView(args[0])
+
+                # 文字列と想定して解析を進める
+                else:
+                    element_list = RenumNum.convert_str_to_list(args[0])
+                    # タプルに変換して渡す
+                    self._beadsv = BeadsView(tuple(element_list))
+
+            # 整数だったら
             else:
-                # 整数ではなかった
-
-                # 文字列として解析する
-                element_list = RenumNum.convert_str_to_list(value)
-                # タプルに変換して渡す
-                self._beadsv = BeadsView(tuple(element_list))
-
+                # そのまま渡す
+                self._beadsv = BeadsView(int_value)
+        
+        # 引数が複数個か？
         else:
-            # 整数だ
             # そのまま渡す
-            self._beadsv = BeadsView(int_value)
+            self._beadsv = BeadsView(args)
+
 
     def __str__(self):
         """辞書順記数法 と 数珠玉記数法 の併用"""
