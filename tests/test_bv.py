@@ -1,7 +1,7 @@
 """
 python -m tests.test_bv
 """
-from src.renumberingist_number.beads_view import BeadsView as BV
+from src.renumnum import BeadsView as BV
 
 # Order of Ascii Code
 #

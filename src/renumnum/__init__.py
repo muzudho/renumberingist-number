@@ -3,7 +3,7 @@ from .beads_view import BeadsView
 from .dictionary_order_number import DictionaryOrderNumber
 
 
-class RenumberingistNumber:
+class RenumNum:
     """リナンバー主義者の番号"""
 
     # めんどくさいので .upper() して 'O' と数字で構成されていればOkとする
@@ -32,7 +32,7 @@ class RenumberingistNumber:
                 # TODO 整数ではなかった
 
                 # 文字列を解析する
-                element_list = RenumberingistNumber.convert_str_to_list(value)
+                element_list = RenumNum.convert_str_to_list(value)
 
         else:
             # 整数だ
@@ -44,7 +44,7 @@ class RenumberingistNumber:
         element_list.append(0)
 
         # タプルに変換して使う
-        return RenumberingistNumber(tuple(element_list))
+        return RenumNum(tuple(element_list))
 
     @staticmethod
     def convert_str_to_list(text):
@@ -52,7 +52,7 @@ class RenumberingistNumber:
         text = text.upper()
 
         # '_', 'A', 'O' と数字で構成されている必要がある
-        result = RenumberingistNumber.__pattern1.match(text)
+        result = RenumNum.__pattern1.match(text)
         if result:
             pass
         else:
@@ -110,7 +110,7 @@ class RenumberingistNumber:
                 # 整数ではなかった
 
                 # 文字列として解析する
-                element_list = RenumberingistNumber.convert_str_to_list(value)
+                element_list = RenumNum.convert_str_to_list(value)
                 # タプルに変換して渡す
                 self._beadsv = BeadsView(tuple(element_list))
 

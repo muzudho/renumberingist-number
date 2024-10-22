@@ -1,7 +1,7 @@
 """
 python -m tests.test_don
 """
-from src.renumberingist_number.dictionary_order_number import DictionaryOrderNumber as DON
+from src.renumnum.dictionary_order_number import DictionaryOrderNumber as DON
 
 test_data = [
     # 正の零

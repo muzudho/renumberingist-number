@@ -1,7 +1,7 @@
 """
 python -m tests.test_rn
 """
-from src.renumberingist_number import RenumberingistNumber as RN
+from src.renumnum import RenumNum as RN
 
 cn = RN.trail_zero((1, 2))
 print(f"{cn.elements}")                # (1, 2, 0)
