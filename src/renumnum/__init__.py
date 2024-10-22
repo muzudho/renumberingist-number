@@ -11,34 +11,50 @@ class RenumNum:
     __pattern1 = re.compile(r"^([_AO\d]*)$")
 
     @staticmethod
-    def trail_zero(value=0):
-        """With trailing zero"""
+    def trail_zero(*args):
+        """With trailing zero
+
+        Parameters
+        ----------
+        *args : tuple
+            可変長引数
+        """
 
         element_list = None
 
-        try:
-            # 整数かどうか判定
-            int_value = int(str(value), 10)
+        # 引数が０個か？
+        if len(args) < 1:
+            raise ValueError('specify one or more arguments')
 
-        except ValueError:
-            # 整数ではなかった
-            #
-            # タプル型なら
-            if type(value) is tuple:
-                # いったんリストに戻す
-                element_list = list(value)
+        # 引数が１つか？
+        elif len(args) == 1:
+            try:
+                # 整数かどうか判定
+                int_value = int(str(args[0]), 10)
 
+            # 整数ではなかったら
+            except ValueError:
+                # タプル型なら
+                if type(args[0]) is tuple:
+                    # いったんリストに戻す
+                    element_list = list(args[0])
+
+                # TODO 整数ではなかったら
+                else:
+                    # 文字列と想定して解析を進める
+                    element_list = RenumNum.convert_str_to_list(args[0])
+
+            # 整数だったら
             else:
-                # TODO 整数ではなかった
+                # リストに変換する
+                element_list = []
+                element_list.append(int_value)
 
-                # 文字列を解析する
-                element_list = RenumNum.convert_str_to_list(value)
-
+        # 引数が複数個か？
         else:
-            # 整数だ
             # リストに変換する
             element_list = []
-            element_list.append(int_value)
+            element_list.extend(list(args))
 
         # 0 の要素を追加
         element_list.append(0)

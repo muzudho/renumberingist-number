@@ -3,17 +3,21 @@ python -m tests.test_rn
 """
 from src.renumnum import RenumNum as RN
 
-cn = RN.trail_zero((1, 2))
-print(f"{cn.elements}")                # (1, 2, 0)
+rn1 = RN.trail_zero(1, 2)
+rn2 = RN.trail_zero((1, 2))
+print(f"{rn1.elements}")                # (1, 2, 0)
+print(f"{rn2.elements}")                # (1, 2, 0)
+if f"{rn1.elements}" != f"{rn2.elements}":
+    raise ValueError(f"{rn1.elements=} != {rn2.elements=}")
 
-cn = RN.trail_zero(3)
-print(f"{cn.elements}")                # (3, 0)
+rn = RN.trail_zero(3)
+print(f"{rn.elements}")                # (3, 0)
 
-cn = RN((1, 2, 0))
-print(f"{cn.elements}")                # (1, 2, 0)
+rn = RN((1, 2, 0))
+print(f"{rn.elements}")                # (1, 2, 0)
 
-cn = RN((3, 0))
-print(f"{cn.elements}")                # (3, 0)
+rn = RN((3, 0))
+print(f"{rn.elements}")                # (3, 0)
 
 test_data = [
     # 種をまく
