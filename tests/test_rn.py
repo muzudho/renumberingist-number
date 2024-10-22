@@ -7,17 +7,56 @@ from src.renumnum import renumnum as rn
 # リナンバリンギスト番号の生成
 vec1 = rn.vec(1, 2)
 vec2 = rn.vec((1, 2))
-print(f"{vec1.elements}")                # (1, 2, 0)
-print(f"{vec2.elements}")                # (1, 2, 0)
+print(str(vec1))            # O1o2o0
+print(str(vec2))            # O1o2o0
+print(f"{vec1.elements}")   # (1, 2, 0)
+print(f"{vec2.elements}")   # (1, 2, 0)
 if f"{vec1.elements}" != f"{vec2.elements}":
     raise ValueError(f"{vec1.elements=} != {vec2.elements=}")
 
 vec1 = rn.vec(3)
 vec2 = rn.vec((3))
-print(f"{vec1.elements}")                # (3, 0)
-print(f"{vec2.elements}")                # (3, 0)
+print(str(vec1))            # O3o0
+print(str(vec2))            # O3o0
+print(f"{vec1.elements}")   # (3, 0)
+print(f"{vec2.elements}")   # (3, 0)
 if f"{vec1.elements}" != f"{vec2.elements}":
     raise ValueError(f"{vec1.elements=} != {vec2.elements=}")
+
+
+# 文字列出力の確認
+# ----------------
+vec = rn.vec(1)
+print(str(vec))     # O1o0
+if str(vec) != 'O1o0':
+    raise ValueError(f'{vec=}')
+
+vec = rn.vec(1, 2)
+print(str(vec))     # O1o2o0
+if str(vec) != 'O1o2o0':
+    raise ValueError(f'{vec=}')
+
+vec = rn.vec('1')
+print(str(vec))     # O1o0
+if str(vec) != 'O1o0':
+    raise ValueError(f'{vec=}')
+
+#vec = rn.vec('1, 2')   # error
+
+vec = rn.vec('_9')
+print(str(vec))     # O_9o0
+if str(vec) != 'O_9o0':
+    raise ValueError(f'{vec=}')
+
+vec = rn.vec('A10')
+print(str(vec))     # OA10o0
+if str(vec) != 'OA10o0':
+    raise ValueError(f'{vec=}')
+
+vec = rn.vec('O1o0')
+print(str(vec))     # O1o0o0        # FIXME 0 が余分につくのは良くない？
+if str(vec) != 'O1o0o0':            # FIXME 0 が余分につくのは良くない？
+    raise ValueError(f'{vec=}')
 
 
 test_data = [

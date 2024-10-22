@@ -1,91 +1,108 @@
-# README to publish
+# pypi にデプロイする
 
-📖 [Pythonスクリプトってどうやってパブリッシュするんだぜ（＾～＾）？](https://crieit.net/drafts/61a3496b73b42)  
+# README.md について
 
-## Step O1o0
+トップ・ディレクトリーの 📄 `README.md` テキストは pypi.org のパッケージのページの README としても使われるので、それを想定して書くこと。  
+画像は相対パスではなくURLを指定すること  
 
-👇 ソースは、 `src` ディレクトリーを作って、その中に入れてほしい  
+# test.pypi.org へのデプロイについて
 
-```plaintext
-👉  └── 📂 src
-        └── 📂 パッケージ名
-            └── 📄 __init__.py
-```
+とりあえずこれを読め  
 
-## Step O2o0
+* 📖 [Packaging Python Projects](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
 
-👇 （していなければ）pipを更新  
-
-```shell
-python -m pip install --upgrade pip
-```
-
-## Step O3o0
-
-👇 （していなければ）buildパッケージをインストール  
-
-```shell
-python.exe -m pip install --upgrade build
-```
-
-## Step O4o0
-
-👇 （していなければ）以下のファイルを新規作成  
+👇　ディレクトリー階層は以下のようにする  
 
 ```plaintext
-    ├── 📂 src
-    │   └── 📂 パッケージ名
-    │       └── 📄 __init__.py
-👉  ├── 📄 setup.cfg  
-👉  └── 📄 setup.py  
+📁 {REPOSITORY_NAME}/    # GitHub のリポジトリー名に対応。詳しくはソースコードの現物参照
+└─ 📄 src/
+    └─ 📄 {PACKATE_NAME}/    # Python パッケージ名に対応。詳しくはソースコードの現物参照
+        ├─ 📄 __init__.py
+        └─ others...
 ```
 
-## Step O5o0
-
-２回目以降のアップロードでは、 `setup.cfg`, `setup.py` ファイルの中のバージョン番号を上げてほしい  
-
-## Step O6o0
-
-（必要ないかもしれないが build をする前に） Git Hub などのリポジトリ―を利用しているなら、コミットしていないファイルがあればコミットしておくといいかもしれない  
-
-## Step O7o0
-
-👇 buildを実行  
+👇　pip をアップデートする  
 
 ```shell
-python.exe -m build
+py -m pip install --upgrade pip
 ```
 
-👇 dist ディレクトリーが自動生成される  
+👇　pypi にアップロードできる形式にファイル圧縮してくれるパッケージをインストールする  
+
+```shell
+py -m pip install --upgrade build
+```
+
+`build` は、 📄 `pyproject.toml` ファイルで指定したビルドツールを使ってくれる  
+
+例では、ビルドツールに Hatchling を使っているので真似てみる  
+
+* 📖 [Hatchling > Build system](https://hatch.pypa.io/latest/config/build/#build-system)
+
+👇  インストールしておく必要があるパッケージを調べる方法はないが、以下のコマンドが利用できるので調べておくこと。関係ないパッケージ名も出てくるので、手動で選別する必要がある  
+
+```shell
+pip freeze
+```
+
+📄 `pyproject.toml` を書く。トップディレクトリーに置いてある現物を参照  
+
+`build` を**実行する前**に:  
+
+* 📄 `pyproject.toml` のバージョンを設定したか確認しておくこと
+* デプロイしたいファイルで、GitHub にプッシュし忘れているファイルが残っていれば、プッシュしてください
+
+👇 pyproject.toml を書き上げたら、 `build` を実行する  
+
+```shell
+py -m build
+```
+
+`build` を実行すると、 `dist` フォルダーが作成される  
+
+例：  
 
 ```plaintext
-    ├── 📂 dist
-👉  │       ├── 📄 パッケージ名-バージョン-py3-none-any.whl
-👉  │       └── 📄 パッケージ名-バージョン.tar.gz
-    ├── 📂 src
-    │   └── 📂 パッケージ名
-    │       └── 📄 __init__.py
-    ├── 📄 setup.cfg  
-    └── 📄 setup.py  
+📁 dist/
+├─ 📄 {PACKATE_NAME}-0.0.1-py2.py3-none-any.whl     # Python パッケージ名に対応。詳しくはソースコードの現物参照
+└─ 📄 {PACKATE_NAME}-0.0.1.tar.gz
 ```
 
-## Step O8o0
+これが pypi にアップロードするファイルだ  
 
-👇 まず、テスト環境へのアップロードを試します  
-PyPi へログインするためのユーザー名とパスワードの入力が求められます  
+[test.pypi.org](https://test.pypi.org/) に Fire Fox でログインする（Google Chrome や Edge では二要素認証が通らないことがあった）  
+
+https://test.pypi.org/account/login/
+
+test.pypi.org にAPIトークンを追加する。スコープは `アカウント全体` を選ぶ。発行されたAPIトークンは再発行されないので、どこかに記憶しておく  
+
+👇 twine をインストールする
 
 ```shell
-python.exe -m twine upload --repository testpypi dist/* --verbose
+py -m pip install --upgrade twine
 ```
 
-ログインに成功すると、アップロードが行われ、 URL が出てくるのでアクセスしてください  
+twine を実行する前に、 📄 `pyproject.toml` のバージョンの数を設定（２回目以降なら上げる）しておくこと  
 
-## Step O9o0
-
-👇 本番です  
+👇 twine を実行する  
 
 ```shell
-python.exe -m twine upload dist/*
+py -m twine upload --repository testpypi dist/*
 ```
 
-ログインに成功すると、アップロードが行われ、 URL が出てくるのでアクセスしてください  
+APIトークンを尋ねられるので、 `pypi-` プレフィックスを付けたまま入力する  
+
+👇 アップロードされたら、test.pypi.org を見に行く  
+
+https://test.pypi.org/project/xltree/0.0.1/  
+
+# pypi.org へのデプロイについて
+
+test.pypi.org と pypi.org は別アカウントなので、ログインし直す。  
+アカウント設定画面から、APIトークンも発行する  
+
+`twine` のコマンド引数が変わる  
+
+```shell
+twine upload dist/*
+```
