@@ -240,6 +240,71 @@ class RenumNum:
         return text
 
 
+    def _kind_of_compare(self, other):
+        me = self.tolist()
+        you = other.tolist()
+        end = max(len(me), len(you))
+        #print(f"{me=}  {you=}  {end=}") # FIXME 消す
+        for i in range(0, end):
+            if i < len(me):
+                me_val = me[i]
+            else:
+                me_val = 0
+            
+            if i < len(you):
+                you_val = you[i]
+            else:
+                you_val = 0
+
+            #print(f"({i=})  {me_val=}  {you_val=}") # FIXME 消す
+
+            if me_val < you_val:
+                return 'less_than'
+            
+            if me_val > you_val:
+                return 'greater_than'
+
+        # equals
+        return 'equals'
+
+
+
+    def __lt__(self, other):
+        """ < 演算子のオーバーロード"""
+        kind = self._kind_of_compare(other=other)
+        return kind == 'less_than'
+
+
+    def __gt__(self, other):
+        """ > 演算子のオーバーロード"""
+        kind = self._kind_of_compare(other=other)
+        return kind == 'greater_than'
+
+
+    def __le__(self, other):
+        """ <= 演算子のオーバーロード"""
+        kind = self._kind_of_compare(other=other)
+        return kind in ['less_than', 'equals']
+
+
+    def __ge__(self, other):
+        """ >= 演算子のオーバーロード"""
+        kind = self._kind_of_compare(other=other)
+        return kind in ['greater_than', 'equals']
+
+
+    def __eq__(self, other):
+        """ == 演算子のオーバーロード"""
+        kind = self._kind_of_compare(other=other)
+        return kind == 'equals'
+
+
+    def __ne__(self, other):
+        """ != 演算子のオーバーロード"""
+        kind = self._kind_of_compare(other=other)
+        return kind != 'equals'
+
+
     @property
     def elements(self):
         return self._beadsv.elements

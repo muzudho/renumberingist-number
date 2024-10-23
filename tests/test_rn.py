@@ -17,19 +17,19 @@ oo1 = rn.num(1, 2)
 oo2 = rn.num((1, 2))
 print(str(oo1))            # O1o2o0
 print(str(oo2))            # O1o2o0
-print(f"{oo1.to_tuple()}")   # (1, 2)
-print(f"{oo2.to_tuple()}")   # (1, 2)
-if oo1.to_tuple() != (1, 2) or f"{oo1.to_tuple()}" != f"{oo2.to_tuple()}":
-    raise ValueError(f"{oo1.to_tuple()=}  {oo1.to_tuple()=} != {oo2.to_tuple()=}")
+print(f"{oo1.totuple()}")   # (1, 2)
+print(f"{oo2.totuple()}")   # (1, 2)
+if oo1.totuple() != (1, 2) or f"{oo1.totuple()}" != f"{oo2.totuple()}":
+    raise ValueError(f"{oo1.totuple()=}  {oo1.totuple()=} != {oo2.totuple()=}")
 
 oo1 = rn.num(3)
 oo2 = rn.num((3))
 print(str(oo1))            # O3o0
 print(str(oo2))            # O3o0
-print(f"{oo1.to_tuple()}")   # (3, 0)
-print(f"{oo2.to_tuple()}")   # (3, 0)
-if f"{oo1.to_tuple()}" != f"{oo2.to_tuple()}":
-    raise ValueError(f"{oo1.to_tuple()=} != {oo2.to_tuple()=}")
+print(f"{oo1.totuple()}")   # (3, 0)
+print(f"{oo2.totuple()}")   # (3, 0)
+if f"{oo1.totuple()}" != f"{oo2.totuple()}":
+    raise ValueError(f"{oo1.totuple()=} != {oo2.totuple()=}")
 
 
 # 文字列出力の確認
@@ -88,22 +88,22 @@ if str(oo) != 'O1o0':
 # タプル、リストへの出力確認
 # --------------------------
 oo = rn.num(1)
-tpl = oo.to_tuple()
-vec = oo.to_list()
+tpl = oo.totuple()
+vec = oo.tolist()
 print(f"{tpl=}  {vec=}")     # (1,)  [1]
 if tpl != (1,) or vec != [1]:
     raise ValueError(f'{oo=}  {vec=}')
 
 oo = rn.num(1, 2)
-tpl = oo.to_tuple()
-vec = oo.to_list()
+tpl = oo.totuple()
+vec = oo.tolist()
 print(f"{tpl=}  {vec=}")     # (1, 2)  [1, 2]
 if tpl != (1, 2) or vec != [1, 2]:
     raise ValueError(f'{oo=}  {vec=}')
 
 oo = rn.num('1')
-tpl = oo.to_tuple()
-vec = oo.to_list()
+tpl = oo.totuple()
+vec = oo.tolist()
 print(f"{tpl=}  {vec=}")     # (1,)  [1]
 if tpl != (1,) or vec != [1]:
     raise ValueError(f'{oo=}  {vec=}')
@@ -111,15 +111,15 @@ if tpl != (1,) or vec != [1]:
 # 辞書順番号（Dictionary order number）。末尾に o0 が付いていなくても、辞書順番号として有効です
 
 oo = rn.num('_9')
-tpl = oo.to_tuple()
-vec = oo.to_list()
+tpl = oo.totuple()
+vec = oo.tolist()
 print(f"{tpl=}  {vec=}")     # (-1,)  [-1]
 if tpl != (-1,) or vec != [-1]:
     raise ValueError(f'{oo=}  {vec=}')
 
 oo = rn.num('A10')
-tpl = oo.to_tuple()
-vec = oo.to_list()
+tpl = oo.totuple()
+vec = oo.tolist()
 print(f"{tpl=}  {vec=}")     # (10,)  [10]
 if tpl != (10,) or vec != [10]:
     raise ValueError(f'{oo=}  {vec=}')
@@ -127,15 +127,15 @@ if tpl != (10,) or vec != [10]:
 # 数珠玉記数法（Beads notation）。末尾に o0 が付いていなくても、数珠玉記数法として有効です
 
 oo = rn.num('O0')
-tpl = oo.to_tuple()
-vec = oo.to_list()
+tpl = oo.totuple()
+vec = oo.tolist()
 print(f"{tpl=}  {vec=}")     # (0,)  [0]
 if tpl != (0,) or vec != [0]:
     raise ValueError(f'{oo=}  {vec=}')
 
 oo = rn.num('O1')
-tpl = oo.to_tuple()
-vec = oo.to_list()
+tpl = oo.totuple()
+vec = oo.tolist()
 print(f"{tpl=}  {vec=}")     # (1,)  [1]
 if tpl != (1,) or vec != [1]:
     raise ValueError(f'{oo=}  {vec=}')
@@ -143,15 +143,15 @@ if tpl != (1,) or vec != [1]:
 # リナンバリンギスト番号
 
 oo = rn.num('O0o0')
-tpl = oo.to_tuple()
-vec = oo.to_list()
+tpl = oo.totuple()
+vec = oo.tolist()
 print(f"{tpl=}  {vec=}")     # (0,)  [0]
 if tpl != (0,) or vec != [0]:
     raise ValueError(f'{oo=}  {vec=}')
 
 oo = rn.num('O1o0')
-tpl = oo.to_tuple()
-vec = oo.to_list()
+tpl = oo.totuple()
+vec = oo.tolist()
 print(f"{tpl=}  {vec=}")     # (1,)  [1]
 if tpl != (1,) or vec != [1]:
     raise ValueError(f'{oo=}  {vec=}')
@@ -159,8 +159,8 @@ if tpl != (1,) or vec != [1]:
 # タプル
 
 oo = rn.num((1, 2))
-tpl = oo.to_tuple()
-vec = oo.to_list()
+tpl = oo.totuple()
+vec = oo.tolist()
 print(f"{tpl=}  {vec=}")     # (1, 2)  [1, 2]
 if tpl != (1, 2) or vec != [1, 2]:
     raise ValueError(f'{oo=}  {vec=}')
@@ -168,11 +168,62 @@ if tpl != (1, 2) or vec != [1, 2]:
 # リスト
 
 oo = rn.num([1, 2])
-tpl = oo.to_tuple()
-vec = oo.to_list()
+tpl = oo.totuple()
+vec = oo.tolist()
 print(f"{tpl=}  {vec=}")     # (1, 2)  [1, 2]
 if tpl != (1, 2) or vec != [1, 2]:
     raise ValueError(f'{oo=}  {vec=}')
+
+
+# 比較演算子 '<' の確認
+# ---------------------
+test_data = [
+    (rn.num([-2]), rn.num([-1])),
+    (rn.num([-1]), rn.num([0])),
+    (rn.num([0]), rn.num([1])),
+    (rn.num([1]), rn.num([2])),
+    (rn.num([-2]), rn.num([2])),
+
+    (rn.num([0, -2]), rn.num([0, -1])),
+    (rn.num([0, -1]), rn.num([0, 0])),
+    (rn.num([0, 0]), rn.num([0, 1])),
+    (rn.num([0, 1]), rn.num([0, 2])),
+    (rn.num([0, -2]), rn.num([0, 2])),
+
+    (rn.num([0, 0, 0]), rn.num([0, 0, 1])),
+    (rn.num([0, 0, 0, 1]), rn.num([0, 0, 1, 0])),
+
+    (rn.num([0, -1]), rn.num([0])),
+    (rn.num([0]), rn.num([0, 1])),
+]
+
+# ホワイトボックステスト
+# for datum in test_data:
+#     print(f"{datum[0].tolist()} compare {datum[1].tolist()}. compare is {datum[0]._kind_of_compare(datum[1])}")
+
+for datum in test_data:
+    if not datum[0] < datum[1]:
+        raise ValueError(f'{str(datum[0])} < {str(datum[1])} is False. {datum[0].tolist()}, {datum[1].tolist()}')
+
+
+    if datum[0] > datum[1]:
+        raise ValueError(f'{str(datum[0])} > {str(datum[1])} is True. {datum[0].tolist()}, {datum[1].tolist()}')
+
+
+    if not datum[0] <= datum[1]:
+        raise ValueError(f'{str(datum[0])} < {str(datum[1])} is False. {datum[0].tolist()}, {datum[1].tolist()}')
+
+
+    if datum[0] >= datum[1]:
+        raise ValueError(f'{str(datum[0])} >= {str(datum[1])} is True. {datum[0].tolist()}, {datum[1].tolist()}')
+
+
+    if datum[0] == datum[1]:
+        raise ValueError(f'{str(datum[0])} == {str(datum[1])} is True. {datum[0].tolist()}, {datum[1].tolist()}')
+
+
+    if not datum[0] != datum[1]:
+        raise ValueError(f'{str(datum[0])} != {str(datum[1])} is False. {datum[0].tolist()}, {datum[1].tolist()}')
 
 
 test_data = [
@@ -263,11 +314,11 @@ test_data = [
 ]
 
 for datum in test_data:
-    if f'{datum[1]}' == datum[2] and datum[1].to_tuple() == datum[3] and datum[1].to_list() == datum[4]:
-        print(f'{datum[0]} --> "{datum[1]}" {datum[1].to_tuple()} {datum[1].to_list()}')
+    if f'{datum[1]}' == datum[2] and datum[1].totuple() == datum[3] and datum[1].tolist() == datum[4]:
+        print(f'{datum[0]} --> "{datum[1]}" {datum[1].totuple()} {datum[1].tolist()}')
     else:
         raise ValueError(
-            f'[Error] {datum[0]} --> "{datum[1]}" {datum[1].to_tuple()} Expected: "{datum[2]}" {datum[3]} {datum[4]}')
+            f'[Error] {datum[0]} --> "{datum[1]}" {datum[1].totuple()} Expected: "{datum[2]}" {datum[3]} {datum[4]}')
 
 # "2oo1" は使えない
 try:
