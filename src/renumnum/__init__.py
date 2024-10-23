@@ -244,19 +244,27 @@ class RenumNum:
         me = self.tolist()
         you = other.tolist()
         end = max(len(me), len(you))
-        #print(f"{me=}  {you=}  {end=}") # FIXME 消す
+        #print(f"{me=}  {you=}  {end=}")
         for i in range(0, end):
             if i < len(me):
                 me_val = me[i]
             else:
+                # NOTE 特殊ルール：[0] と [0, 0] では、[0, 0] の方が大きい
+                if you[i] == 0:
+                    return 'less_than'
+
                 me_val = 0
             
             if i < len(you):
                 you_val = you[i]
             else:
+                # NOTE 特殊ルール：[0, 0] と [0] では、[0, 0] の方が大きい
+                if me[i] == 0:
+                    return 'greater_than'
+
                 you_val = 0
 
-            #print(f"({i=})  {me_val=}  {you_val=}") # FIXME 消す
+            #print(f"({i=})  {me_val=}  {you_val=}")
 
             if me_val < you_val:
                 return 'less_than'

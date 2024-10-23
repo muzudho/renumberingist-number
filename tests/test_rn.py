@@ -1,6 +1,9 @@
 """
 python -m tests.test_rn
 """
+
+import sys  # テスト用
+
 # 実際には、
 #
 #   import renumnum as rn
@@ -11,6 +14,21 @@ from src.renumnum import renumnum_in_src as rn
 
 
 # リナンバリンギスト番号の変数名は何でも構いませんがとりあえず oo としてみましょう
+try:
+    oo = rn.num()
+
+    # 例外が投げられてこなかったらエラー
+    raise ValueError('no parameter most be error')
+
+except ValueError as e:
+    if str(e) != 'specify one or more arguments':
+        raise ValueError('no parameter most be error') from e
+
+    # 例外が投げられてくるのが正しい。ここを抜ける
+
+except:
+    raise ValueError('no parameter most be error') from e
+
 
 # リナンバリンギスト番号の生成
 oo1 = rn.num(1, 2)
@@ -109,7 +127,6 @@ if tpl != (1,) or vec != [1]:
     raise ValueError(f'{oo=}  {vec=}')
 
 # 辞書順番号（Dictionary order number）。末尾に o0 が付いていなくても、辞書順番号として有効です
-
 oo = rn.num('_9')
 tpl = oo.totuple()
 vec = oo.tolist()
@@ -125,7 +142,6 @@ if tpl != (10,) or vec != [10]:
     raise ValueError(f'{oo=}  {vec=}')
 
 # 数珠玉記数法（Beads notation）。末尾に o0 が付いていなくても、数珠玉記数法として有効です
-
 oo = rn.num('O0')
 tpl = oo.totuple()
 vec = oo.tolist()
@@ -141,7 +157,6 @@ if tpl != (1,) or vec != [1]:
     raise ValueError(f'{oo=}  {vec=}')
 
 # リナンバリンギスト番号
-
 oo = rn.num('O0o0')
 tpl = oo.totuple()
 vec = oo.tolist()
@@ -157,7 +172,6 @@ if tpl != (1,) or vec != [1]:
     raise ValueError(f'{oo=}  {vec=}')
 
 # タプル
-
 oo = rn.num((1, 2))
 tpl = oo.totuple()
 vec = oo.tolist()
@@ -166,7 +180,6 @@ if tpl != (1, 2) or vec != [1, 2]:
     raise ValueError(f'{oo=}  {vec=}')
 
 # リスト
-
 oo = rn.num([1, 2])
 tpl = oo.totuple()
 vec = oo.tolist()
@@ -175,8 +188,21 @@ if tpl != (1, 2) or vec != [1, 2]:
     raise ValueError(f'{oo=}  {vec=}')
 
 
-# 比較演算子 '<' の確認
-# ---------------------
+
+# 比較
+print("O1o0 < O2o0")
+oo1 = rn.num('O1o0')
+oo2 = rn.num('O2o0')
+print(oo1 < oo2)        # True
+
+print("O1o0 < O1o0o0")
+oo1 = rn.num('O1o0')
+oo2 = rn.num('O1o0o0')
+print(oo1 < oo2)        # True
+
+
+# 比較演算子の確認 '<'
+# --------------------
 test_data = [
     (rn.num([-2]), rn.num([-1])),
     (rn.num([-1]), rn.num([0])),
@@ -192,9 +218,16 @@ test_data = [
 
     (rn.num([0, 0, 0]), rn.num([0, 0, 1])),
     (rn.num([0, 0, 0, 1]), rn.num([0, 0, 1, 0])),
+    (rn.num([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4, 6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5, 0, 2, 8, 8, 4, 1, 9, 7, 1]),
+     rn.num([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4, 6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5, 0, 2, 8, 8, 4, 1, 9, 7, 2])),
 
     (rn.num([0, -1]), rn.num([0])),
     (rn.num([0]), rn.num([0, 1])),
+
+    # 特殊系
+    (rn.num([0]), rn.num([0, 0])),
+    (rn.num([0, 0]), rn.num([0, 0, 0])),
+    (rn.num([0]), rn.num([0, 0, 0])),
 ]
 
 # ホワイトボックステスト
@@ -211,7 +244,7 @@ for datum in test_data:
 
 
     if not datum[0] <= datum[1]:
-        raise ValueError(f'{str(datum[0])} < {str(datum[1])} is False. {datum[0].tolist()}, {datum[1].tolist()}')
+        raise ValueError(f'{str(datum[0])} <= {str(datum[1])} is False. {datum[0].tolist()}, {datum[1].tolist()}')
 
 
     if datum[0] >= datum[1]:
@@ -224,6 +257,46 @@ for datum in test_data:
 
     if not datum[0] != datum[1]:
         raise ValueError(f'{str(datum[0])} != {str(datum[1])} is False. {datum[0].tolist()}, {datum[1].tolist()}')
+
+
+# 比較演算子の確認 '=='
+# ---------------------
+test_data = [
+    (rn.num([-1]), rn.num([-1])),
+    (rn.num([0]), rn.num([0])),
+    (rn.num([1]), rn.num([1])),
+
+    (rn.num([0, -1]), rn.num([0, -1])),
+    (rn.num([0, 0]), rn.num([0, 0])),
+    (rn.num([0, 1]), rn.num([0, 1])),
+
+    (rn.num([-1, 0, 1]), rn.num([-1, 0, 1])),
+    (rn.num([-1, 0, 1, 10]), rn.num([-1, 0, 1, 10])),
+]
+
+for datum in test_data:
+    if datum[0] < datum[1]:
+        raise ValueError(f'{str(datum[0])} < {str(datum[1])} is True. {datum[0].tolist()}, {datum[1].tolist()}')
+
+
+    if datum[0] > datum[1]:
+        raise ValueError(f'{str(datum[0])} > {str(datum[1])} is True. {datum[0].tolist()}, {datum[1].tolist()}')
+
+
+    if not datum[0] <= datum[1]:
+        raise ValueError(f'{str(datum[0])} <= {str(datum[1])} is False. {datum[0].tolist()}, {datum[1].tolist()}')
+
+
+    if not datum[0] >= datum[1]:
+        raise ValueError(f'{str(datum[0])} >= {str(datum[1])} is False. {datum[0].tolist()}, {datum[1].tolist()}')
+
+
+    if not datum[0] == datum[1]:
+        raise ValueError(f'{str(datum[0])} == {str(datum[1])} is False. {datum[0].tolist()}, {datum[1].tolist()}')
+
+
+    if datum[0] != datum[1]:
+        raise ValueError(f'{str(datum[0])} != {str(datum[1])} is True. {datum[0].tolist()}, {datum[1].tolist()}')
 
 
 test_data = [
